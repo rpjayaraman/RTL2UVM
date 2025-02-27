@@ -7,7 +7,7 @@ Automated UVM testbench generator from Verilog RTL with optional LLM integration
 
 `RTL2UVM` is a Python-based tool that automates the creation of SystemVerilog UVM (Universal Verification Methodology) testbenches directly from your Verilog RTL (Register Transfer Level) design.  It parses your Verilog code using `pyslang`, extracts port information, and generates a complete UVM testbench framework, significantly reducing the manual effort involved in verification setup.
 
-![Gist of RTL2UVMM](https://raw.githubusercontent.com/rpjayaraman/RTL2UVM/refs/heads/main/Screenshot/rtl2uvm.png)
+![Gist of RTL2UVMM](https://raw.githubusercontent.com/rpjayaraman/RTL2UVM/refs/heads/main/Screenshot/rtl2uvm_updated.png)
 
 **Key Features:**
 
