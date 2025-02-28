@@ -481,6 +481,8 @@ endtask: run_phase
     prompt = f"Goal is to generate uvm driver for the given design. I will provide the reference uvm driver, please make sure you follow the same template. Here is the uvm driver {driver_temp_content}. Given the following DUT code:\n\n{dut_design_file}\n\n" \
     f"Understand the design and consider the input ports {', '.join(input_declarators)} and output ports {', '.join(output_declarators)}. Based on your understanding, generate ONLY the SystemVerilog UVM driver code.Do not include any comments or explanations. Output only the code.No comments. No explanation. No header or footer."
     driver_logic = call_gemini(prompt)
+    driver_logic = re.sub(r"```systemverilog\n?", "", driver_logic)  # Remove opening marker
+    driver_logic= re.sub(r"```\n?", "", driver_logic)              # Remove closing marker    
     with open(l_driver_path,"a+") as file:
       file.write(driver_logic)
   else:
@@ -593,6 +595,8 @@ endtask: run_phase
          prompt = f"Given the following DUT code:\n\n{dut_design_file}\n\n" \
          f"and the input ports {', '.join(input_declarators)} and output ports {', '.join(output_declarators)}, and please keep {monitor_logic_temp} as reference and create the response using the same template andunderstand the design and generate ONLY the SystemVerilog UVM monitor code for the design.  Do not include any comments or explanations. Output only the code . No comments. No explanation. No header or footer."
          monitor_logic = call_gemini(prompt)
+         monitor_logic = re.sub(r"```systemverilog\n?", "", monitor_logic)  # Remove opening marker
+         monitor_logic = re.sub(r"```\n?", "", monitor_logic)              # Remove closing marker    
          file.write(monitor_logic)
     else:
          file.write("`define MON_VIF vif.MONITOR.monitor_cb")
