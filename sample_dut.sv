@@ -1,4 +1,4 @@
-module adder(clk, reset,in1, in2,out);
+module sample_dut (clk, reset,in1, in2,out);
 input clk;
 input reset; 
 input [7:0] in1;
