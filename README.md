@@ -1,7 +1,7 @@
 # RTL2UVM
 Automated UVM testbench generator from Verilog RTL with optional LLM integration for advanced logic creation.
 
-## Youtube Link: https://www.youtube.com/@Random_dv_guy
+## Youtube Link: https://www.youtube.com/@wt_bug
 
 ## Overview
 
