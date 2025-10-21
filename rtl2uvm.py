@@ -625,7 +625,7 @@ endtask: run_phase
          file.write("\ntask "+monitor_name+"::run_phase(uvm_phase phase);\n")
          file.write("\tsuper.run_phase(phase);\n")
          file.write("\n `uvm_info(get_type_name(),\"In Run Phase ...\",UVM_NONE)\n")
-         file.write("\n\ttr="+seq_item_name+"::type_id::create(\"rx\",this);\n")
+         #file.write("\n\ttr="+seq_item_name+"::type_id::create(\"rx\",this);\n")
          file.write("\t//forever begin //{\n")
          file.write("\t\t//Monitor Logic\n")
          file.write("\t\t// Add your monitor logic here .\n")
@@ -1044,7 +1044,30 @@ def create_makefile(dut_name, verilator_path, coverage_flag, ex_cr):
         file.write("ifdef VERILATOR_ROOT\n")
         file.write("VERILATOR := $(VERILATOR_ROOT)/bin/verilator\n")
         file.write("endif\n\n")
-        file.write("UVM_ROOT ?= uvm_verilator \n")
+        search_dirs = [
+            os.getcwd(),
+            os.path.join(os.getcwd(), ".."),
+        ]
+        
+        # Add all immediate subdirectories (one level below)
+        search_dirs.extend([
+            os.path.join(os.getcwd(), d)
+            for d in os.listdir(os.getcwd())
+            if os.path.isdir(os.path.join(os.getcwd(), d))
+        ])
+        
+        uvm_root = None
+        for directory in search_dirs:
+            candidate = os.path.join(directory, "uvm_verilator")
+            if os.path.isdir(candidate):
+                uvm_root = os.path.realpath(candidate)
+                break
+        
+        if uvm_root:
+            file.write(f"UVM_ROOT ?= {uvm_root}\n")
+        else:
+            # Optional: fallback or raise an error
+            raise FileNotFoundError("uvm_verilator directory not found in current, parent, or immediate subdirectories.")
         file.write(f"UVM_TEST ?= {test_name}\n\n")
         file.write(f"VERILOG_DEFINE_FILES = ${{UVM_ROOT}}/src/uvm.sv ./tb/{top_name}.sv ./tb/{dut_name}.sv\n")
         file.write("VERILOG_INCLUDE_DIRS = tb ${UVM_ROOT}/src\n\n")
