@@ -1044,7 +1044,7 @@ def create_makefile(dut_name, verilator_path, coverage_flag, ex_cr):
         file.write("ifdef VERILATOR_ROOT\n")
         file.write("VERILATOR := $(VERILATOR_ROOT)/bin/verilator\n")
         file.write("endif\n\n")
-        file.write("UVM_ROOT ?= /home/jrp/JRP_OPENSOURCE/verilator-verification-features-tests/uvm \n")
+        file.write("UVM_ROOT ?= uvm_verilator \n")
         file.write(f"UVM_TEST ?= {test_name}\n\n")
         file.write(f"VERILOG_DEFINE_FILES = ${{UVM_ROOT}}/src/uvm.sv ./tb/{top_name}.sv ./tb/{dut_name}.sv\n")
         file.write("VERILOG_INCLUDE_DIRS = tb ${UVM_ROOT}/src\n\n")
