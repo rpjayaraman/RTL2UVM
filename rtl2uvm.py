@@ -625,7 +625,7 @@ endtask: run_phase
          file.write("\ntask "+monitor_name+"::run_phase(uvm_phase phase);\n")
          file.write("\tsuper.run_phase(phase);\n")
          file.write("\n `uvm_info(get_type_name(),\"In Run Phase ...\",UVM_NONE)\n")
-         #file.write("\n\ttr="+seq_item_name+"::type_id::create(\"rx\",this);\n")
+         file.write("\n\trx="+seq_item_name+"::type_id::create(\"rx\",this);\n")
          file.write("\t//forever begin //{\n")
          file.write("\t\t//Monitor Logic\n")
          file.write("\t\t// Add your monitor logic here .\n")
