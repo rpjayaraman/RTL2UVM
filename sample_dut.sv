@@ -1,12 +1,31 @@
-module sample_dut (clk, reset,in1, in2,out);
-input clk;
+module sample_dut (clk,
+    reset,
+    din,
+    read,
+    write,
+    dout,
+    empty,
+    full,
+    ale,
+    alf
+   ); 
+
+
+parameter DATA_WIDTH=8;
+parameter ADDR_WIDTH=4;
+
+input clk; 
 input reset; 
-input [7:0] in1;
-input [7:0] in2; 
-output reg [8:0] out;
-  always@(posedge clk or posedge reset) begin 
-    if(reset) out <= 0;
-    else out <= in1 + in2;
-  end
-endmodule
-//Form https://vlsiverify.com/uvm/uvm-adder-example/
+input [DATA_WIDTH-1:0]din;    
+input read; 
+input write; 
+
+
+output [DATA_WIDTH-1:0]dout; 
+output empty;      
+output full; 
+output ale; 
+output alf; 
+
+
+endmodule 
